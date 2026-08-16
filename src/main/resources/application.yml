@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /SimpleRestSpec
+
+spring:
+  datasource:
+    url: jdbc:sqlite:${user.home}/.simpleRestSpec/simplerestspec.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
