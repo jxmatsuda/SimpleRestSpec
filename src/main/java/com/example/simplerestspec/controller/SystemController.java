@@ -22,6 +22,11 @@ public class SystemController {
         private String example;
     }
 
+    @GetMapping("/version")
+    public String version() {
+        return "Ver.0.0.1";
+    }
+
     @GetMapping("/endpoints")
     public List<EndpointInfo> getEndpoints() {
         String contextExample = "{\"id\": 1, \"url\": \"http://localhost:8080/SimpleRestSpec\"}";
