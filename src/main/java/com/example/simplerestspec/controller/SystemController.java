@@ -24,7 +24,7 @@ public class SystemController {
 
     @GetMapping("/version")
     public String version() {
-        return "Ver.0.0.1";
+        return "Ver.0.1.0";
     }
 
     @GetMapping("/endpoints")
