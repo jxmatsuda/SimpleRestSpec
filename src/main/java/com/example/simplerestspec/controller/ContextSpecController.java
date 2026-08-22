@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Comparator;
 import java.util.List;
 import java.util.zip.*;
 
@@ -31,7 +32,9 @@ public class ContextSpecController {
 
     @GetMapping
     public List<ContextSpec> getAllContexts() {
-        return repository.findAll();
+        List<ContextSpec> contexts = repository.findAll();
+        contexts.sort(Comparator.comparing(ContextSpec::getUrl,String.CASE_INSENSITIVE_ORDER));
+        return contexts;
     }
 
     @GetMapping("/{id}")

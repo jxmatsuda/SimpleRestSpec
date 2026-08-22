@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -19,12 +20,16 @@ public class ApiSpecController {
 
     @GetMapping
     public List<ApiSpec> getAllSpecs() {
-        return repository.findAll();
+        List<ApiSpec> specs = repository.findAll();
+        specs.sort(Comparator.comparing(ApiSpec::getName, String.CASE_INSENSITIVE_ORDER));
+        return specs;
     }
 
     @GetMapping("/{contextId}")
     public ResponseEntity<List<ApiSpec>> getSpecsByContext(@PathVariable Long contextId) {
-        return ResponseEntity.ok(repository.findByContext_Id(contextId));
+        List<ApiSpec> specs = repository.findByContext_Id(contextId);
+        specs.sort(Comparator.comparing(ApiSpec::getName, String.CASE_INSENSITIVE_ORDER));
+        return ResponseEntity.ok(specs);
     }
 
     @GetMapping("/{contextId}/{id}")
