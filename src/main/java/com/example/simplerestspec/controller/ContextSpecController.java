@@ -60,6 +60,7 @@ public class ContextSpecController {
     public ResponseEntity<ContextSpec> updateContext(@PathVariable Long id, @RequestBody ContextSpec contextDetails) {
         return repository.findById(id).map(context -> {
             context.setUrl(contextDetails.getUrl());
+            context.setMemo(contextDetails.getMemo());
             return ResponseEntity.ok(repository.save(context));
         }).orElse(ResponseEntity.notFound().build());
     }

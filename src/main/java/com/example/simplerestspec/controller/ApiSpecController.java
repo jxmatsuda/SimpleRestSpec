@@ -19,8 +19,13 @@ public class ApiSpecController {
     private final ApiSpecRepository repository;
 
     @GetMapping
-    public List<ApiSpec> getAllSpecs() {
-        List<ApiSpec> specs = repository.findAll();
+    public List<ApiSpec> getAllSpecs(@RequestParam(required = false) Long context_id) {
+        List<ApiSpec> specs;
+        if (context_id != null) {
+            specs = repository.findByContext_Id(context_id);
+        } else {
+            specs = repository.findAll();
+        }
         specs.sort(Comparator.comparing(ApiSpec::getName, String.CASE_INSENSITIVE_ORDER));
         return specs;
     }

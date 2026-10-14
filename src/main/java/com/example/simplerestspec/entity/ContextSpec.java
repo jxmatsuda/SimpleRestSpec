@@ -2,6 +2,7 @@ package com.example.simplerestspec.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class ContextSpec {
 
     private String url;
 
-    @OneToMany(mappedBy = "context", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String memo;
+
+    @Transient
+    @JsonIgnore
     @Builder.Default
     private List<ApiSpec> apiSpecs = new ArrayList<>();
 }
